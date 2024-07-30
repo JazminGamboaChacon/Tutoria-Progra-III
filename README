@@ -1,0 +1,20 @@
+---------------------------------------INGLES-------------------------------------------------
+
+/**
+Resume: Use of Streams in Java
+
+Streams in Java provide a powerful and efficient way to process collections of data. 
+They allow for concise and expressive code, enabling developers to perform complex operations 
+on data with ease. In this resume, we will explore the different types of streams and their usage 
+with examples.
+
+1. IntStream:
+   - IntStream is used to process streams of primitive integers.
+   - Example: Summing all the even numbers from 1 to 10 using IntStream.
+     ```java
+     int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+     int sum = Arrays.stream(numbers)
+                           .filter(n -> n % 2 == 0)
+                           .sum();
+     ```
+     Result: `sum = 30`
