@@ -18,3 +18,15 @@ with examples.
                            .sum();
      ```
      Result: `sum = 30`
+
+2. Stream<T>:
+   - Stream<T> is used to process streams of objects of type T.
+   - Example: Filtering a list of strings to get only the ones starting with "A".
+     ```java
+     String[] strings = {"Apple", "Banana", "Avocado", "Orange"};
+     List<String> filteredStrings = Arrays.stream(strings)
+                                                       .filter(s -> s.startsWith("A"))
+                                                       .collect(Collectors.toList());
+     ```
+     Result: `filteredStrings = ["Apple", "Avocado"]`
+
