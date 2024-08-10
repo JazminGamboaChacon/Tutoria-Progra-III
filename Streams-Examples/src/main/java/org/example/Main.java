@@ -82,4 +82,108 @@ public class Main {
         System.out.println("Valor máximo: " + max.orElse(null));
     }
 
+//solucion Segunda clase 
+    public static List<Integer> filterOddNumbers() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        return numbers.stream()
+                .filter(n -> n % 2 != 0)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> filterLongStrings() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry", "date", "fig");
+        return strings.stream()
+                .filter(s -> s.length() > 5)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Integer> filterNegativeNumbers() {
+        List<Integer> numbers = Arrays.asList(-10, -5, 0, 5, 10);
+        return numbers.stream()
+                .filter(n -> n < 0)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> filterStringsWithA() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry", "date", "fig");
+        return strings.stream()
+                .filter(s -> s.contains("a"))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Integer> mapToSquares() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        return numbers.stream()
+                .map(n -> n * n)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Integer> mapToStringLengths() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        return strings.stream()
+                .map(String::length)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> mapToUpperCase() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        return strings.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> mapWithPrefix() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        return strings.stream()
+                .map(s -> "fruta: " + s)
+                .collect(Collectors.toList());
+    }
+
+    public static int sumNumbers() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        return numbers.stream()
+                .reduce(0, Integer::sum);
+    }
+
+    public static int multiplyNumbers() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        return numbers.stream()
+                .reduce(1, (a, b) -> a * b);
+    }
+
+    public static String concatenateStrings() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        return strings.stream()
+                .reduce("", (a, b) -> a + b);
+    }
+
+    public static int findMaxValue() {
+        List<Integer> numbers = Arrays.asList(10, 20, 30, 40, 50);
+        return numbers.stream()
+                .reduce(Integer.MIN_VALUE, Integer::max);
+    }
+
+    public static List<Integer> filterAndMapEvenSquares() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .map(n -> n * n)
+                .collect(Collectors.toList());
+    }
+
+    public static int mapAndReduceToTotalLength() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        return strings.stream()
+                .map(String::length)
+                .reduce(0, Integer::sum);
+    }
+
+    public static String filterMapAndReduceStrings() {
+        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        return strings.stream()
+                .filter(s -> s.contains("e"))
+                .map(String::toUpperCase)
+                .reduce("", (a, b) -> a + b);
+    }    
+
 }
