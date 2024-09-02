@@ -1,13 +1,11 @@
 type Query {
     obtenerUsuarios: [Usuario]
-    obtenerUsuario(id: ID!): Usuario
 }
 
 type Mutation {
     crearUsuario(nombre: String!, email: String!): Usuario
     eliminarUsuario(id: ID!): Boolean
 }
-
 
 type Usuario {
     id: ID

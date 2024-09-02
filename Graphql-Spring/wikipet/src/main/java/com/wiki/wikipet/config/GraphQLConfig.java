@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Configuration
-public class GraphQLConfig {
+public class    GraphQLConfig {
 
     @Bean
     public GraphQLSchema graphQLSchema() throws IOException {

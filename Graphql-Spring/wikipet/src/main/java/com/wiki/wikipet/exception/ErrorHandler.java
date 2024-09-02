@@ -1,4 +1,5 @@
-package com.wiki.wiki.exception;
+package com.wiki.wikipet.exception;
+
 import com.wiki.wikipet.exception.CustomException;
 
 import org.springframework.http.HttpStatus;
