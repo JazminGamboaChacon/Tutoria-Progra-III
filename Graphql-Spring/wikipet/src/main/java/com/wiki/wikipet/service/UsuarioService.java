@@ -28,10 +28,8 @@ public class UsuarioService {
         nuevoUsuario.setEmail(email);
 
         Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
-
         try {
             String subject = "¡Bienvenido a WikiPet, " + nombre + "!";
-
             String mensajeHTML = "<html>"
                     + "<head>"
                     + "<style>"
@@ -57,10 +55,36 @@ public class UsuarioService {
 
     public boolean eliminarUsuario(Long id) {
         if (usuarioRepository.existsById(id)) {
-            usuarioRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
+            Usuario usuarioAEliminar = usuarioRepository.findById(id).orElse(null);
+
+            if (usuarioAEliminar != null) {
+                usuarioRepository.deleteById(id);
+
+                try {
+                    String subject = "Cuenta eliminada de WikiPet";
+                    String mensajeHTML = "<html>"
+                            + "<head>"
+                            + "<style>"
+                            + "body { font-family: Arial, sans-serif; background-color: #f2f2f2; }"
+                            + "h1 { color: #B22222; text-align: center; }"
+                            + "p { color: #666; }"
+                            + "</style>"
+                            + "</head>"
+                            + "<body>"
+                            + "<h1>Cuenta eliminada</h1>"
+                            + "<p>Tu cuenta con el nombre de " + usuarioAEliminar.getNombre() + " ha sido eliminada correctamente.</p>"
+                            + "<p>Si esto fue un error, por favor contáctanos para restaurarla.</p>"
+                            + "</body>"
+                            + "</html>";
+
+                    emailService.sendSimpleEmail(usuarioAEliminar.getEmail(), subject, mensajeHTML);
+                } catch (MessagingException e) {
+                    System.err.println("Error al enviar el correo de eliminación: " + e.getMessage());
+                }
+
+                return true;
+            }
         }
+        return false;
     }
 }
