@@ -5,6 +5,7 @@ type Query {
 type Mutation {
     crearUsuario(nombre: String!, email: String!): Usuario
     eliminarUsuario(id: ID!): Boolean
+    sendEmail(toEmail: String!, subject: String! ,body: String!): String
 }
 
 type Usuario {

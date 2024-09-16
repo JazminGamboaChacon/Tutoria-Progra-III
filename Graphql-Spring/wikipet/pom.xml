@@ -99,15 +99,16 @@
 			<version>12.0.0</version>
 		</dependency>
 
-		<!-- GraphQL Spring Boot Starter -->
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>graphql-spring-boot-starter</artifactId>
-			<version>12.0.0</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-graphql</artifactId>
+		</dependency>
+
+		<!-- Email-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>3.3.3</version>
 		</dependency>
 	</dependencies>
 
