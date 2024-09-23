@@ -3,13 +3,18 @@ package com.wiki.wikipet.service;
 import com.wiki.wikipet.model.Usuario;
 import com.wiki.wikipet.repository.UsuarioRepository;
 import jakarta.mail.MessagingException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import com.github.javafaker.Faker;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 @Service
 public class UsuarioService {
-
+    private final Faker faker = new Faker();
     private final UsuarioRepository usuarioRepository;
     private final EmailService emailService;
 
@@ -87,4 +92,22 @@ public class UsuarioService {
         }
         return false;
     }
+
+    @Transactional
+    public void generarUsuariosFalsos(int cantidad) {
+        for (int i = 0; i < cantidad; i++) {
+            Usuario usuarioFalso = new Usuario();
+            usuarioFalso.setNombre(faker.name().fullName());
+            usuarioFalso.setEmail(faker.internet().emailAddress());
+            usuarioRepository.save(usuarioFalso);
+            String subject = "¡Bienvenido a WikiPet, " + usuarioFalso.getNombre() + "!";
+             System.out.println(subject);
+        }
+    }
+
+    public Page<Usuario> obtenerUsuariosPaginados(int pagina, int tamano) {
+        Pageable pageable = PageRequest.of(pagina, tamano);
+        return usuarioRepository.findAll(pageable);
+    }
+
 }

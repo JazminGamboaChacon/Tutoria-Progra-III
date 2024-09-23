@@ -1,15 +1,27 @@
 type Query {
     obtenerUsuarios: [Usuario]
+    obtenerUsuariosPaginados(pagina: Int!, tamano: Int!): UsuarioPage
+
 }
 
 type Mutation {
     crearUsuario(nombre: String!, email: String!): Usuario
     eliminarUsuario(id: ID!): Boolean
     sendEmail(toEmail: String!, subject: String! ,body: String!): String
+    generarUsuariosFalsos(cantidad: Int!): Boolean
+
 }
 
 type Usuario {
     id: ID
     nombre: String
     email: String
+}
+
+type UsuarioPage {
+    content: [Usuario]
+    totalPages: Int
+    totalElements: Int
+    size: Int
+    number: Int
 }

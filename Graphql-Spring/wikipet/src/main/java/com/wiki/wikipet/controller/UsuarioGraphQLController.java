@@ -1,4 +1,5 @@
 package com.wiki.wikipet.controller;
+import org.springframework.data.domain.Page;
 
 import com.wiki.wikipet.model.Usuario;
 import com.wiki.wikipet.service.UsuarioService;
@@ -30,4 +31,17 @@ public class UsuarioGraphQLController {
     public boolean eliminarUsuario(@Argument Long id) {
         return usuarioService.eliminarUsuario(id);
     }
+
+
+    @MutationMapping
+    public boolean generarUsuariosFalsos(@Argument int cantidad) {
+        usuarioService.generarUsuariosFalsos(cantidad);
+        return true;
+    }
+
+    @QueryMapping
+    public Page<Usuario> obtenerUsuariosPaginados(@Argument int pagina, @Argument int tamano) {
+        return usuarioService.obtenerUsuariosPaginados(pagina, tamano);
+    }
+
 }
