@@ -21,6 +21,7 @@ public class UsuarioService {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        //connection.setRequestProperty("Authorization", "Bearer " + token);
         connection.setDoOutput(true);
 
         try (OutputStream os = connection.getOutputStream()) {
