@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="471.0" prefWidth="606.0" spacing="20.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cliente.controller.HelloController">
+<VBox alignment="CENTER" prefHeight="619.0" prefWidth="874.0" spacing="20.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cliente.controller.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -19,14 +19,17 @@
         <children>
             <HBox prefHeight="86.0" prefWidth="566.0">
                 <children>
-                    <Label prefHeight="17.0" prefWidth="73.0" text="ID" />
+                    <Label prefHeight="17.0" prefWidth="27.0" text="ID" />
                     <TextField fx:id="txtId" />
-                    <Separator prefHeight="4.0" prefWidth="110.0" visible="false" />
-                    <Label prefHeight="17.0" prefWidth="73.0" text="Nombre" />
+                    <Separator prefHeight="7.0" prefWidth="30.0" visible="false" />
+                    <Label prefHeight="17.0" prefWidth="50.0" text="Nombre" />
                     <TextField fx:id="txtNombre" />
-                    <Separator prefHeight="4.0" prefWidth="110.0" visible="false" />
-                    <Label prefHeight="17.0" prefWidth="52.0" text="Email" />
+                    <Separator prefHeight="1.0" prefWidth="19.0" visible="false" />
+                    <Label prefHeight="17.0" prefWidth="29.0" text="Email" />
                     <TextField fx:id="txtEmail" />
+               <Separator prefHeight="1.0" prefWidth="19.0" visible="false" />
+               <Label prefHeight="17.0" prefWidth="68.0" text="Contraseña" />
+               <TextField fx:id="txtPassword" />
                 </children>
             </HBox>
             <HBox alignment="CENTER">
@@ -35,6 +38,7 @@
                     <Button fx:id="btnObtener" onAction="#onHelloButtonClick" text="Obtener" />
                     <Button fx:id="btnActualizar" onAction="#actualizarUsuario" text="Actualizar" />
                     <Button fx:id="btnEliminar" onAction="#eliminarUsuario" text="Eliminar" />
+               <Button mnemonicParsing="false" onAction="#restorePassword" text="Recuperacion" />
                 </children>
                 <opaqueInsets>
                     <Insets />
@@ -45,8 +49,10 @@
     <TableView fx:id="tblUsuarios" prefHeight="200.0" prefWidth="200.0">
         <columns>
             <TableColumn fx:id="tblColumId" prefWidth="100.0" text="ID" />
-            <TableColumn fx:id="tblColumNombre" prefWidth="200.0" text="Nombre" />
-            <TableColumn fx:id="tblColEmail" prefWidth="200.0" text="Email" />
+            <TableColumn fx:id="tblColumNombre" prefWidth="182.0" text="Nombre" />
+            <TableColumn fx:id="tblColEmail" prefWidth="149.0" text="Email" />
+         <TableColumn fx:id="tblColPass" prefWidth="191.0" text="Contraseña" />
+         <TableColumn fx:id="tblColstatus" prefWidth="210.0" text="Estado" />
         </columns>
     </TableView>
 </VBox>

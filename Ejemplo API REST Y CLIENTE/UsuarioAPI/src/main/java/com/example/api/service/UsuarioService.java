@@ -33,6 +33,8 @@ public class UsuarioService {
             Usuario usuario = usuarioExistente.get();
             usuario.setNombre(usuarioActualizado.getNombre());
             usuario.setEmail(usuarioActualizado.getEmail());
+            usuario.setActivo(usuarioActualizado.isActivo());
+            usuario.setPassword(usuarioActualizado.getPassword());
             return usuarioRepository.save(usuario);
         } else {
             throw new RuntimeException("Usuario no encontrado con el id: " + id);
@@ -42,4 +44,31 @@ public class UsuarioService {
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    public Usuario restablecerContraseña(String email, String nuevaContraseña) {
+        Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(email);
+        if (usuarioExistente.isPresent()) {
+            Usuario usuario = usuarioExistente.get();
+            usuario.setPassword(nuevaContraseña);
+            return usuarioRepository.save(usuario);
+        } else {
+            throw new RuntimeException("Usuario no encontrado con el email: " + email);
+        }
+    }
+
+    public Usuario activarUsuario(Long id) {
+        Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+        if (usuarioExistente.isPresent()) {
+            Usuario usuario = usuarioExistente.get();
+            usuario.setActivo(true);
+            return usuarioRepository.save(usuario);
+        } else {
+            throw new RuntimeException("Usuario no encontrado con el id: " + id);
+        }
+    }
+
+    public Optional<Usuario> obtenerPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
 }

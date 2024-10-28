@@ -23,7 +23,10 @@ public class HelloController {
     private TextField txtEmail;
 
     @FXML
-    private TextField txtId; // Para seleccionar el ID de usuario a actualizar o eliminar
+    private TextField txtId;
+
+    @FXML
+    private TextField txtPassword;
 
     @FXML
     private Button btnRegistrar;
@@ -49,6 +52,13 @@ public class HelloController {
     @FXML
     private TableColumn<Usuario, Long> tblColumId;
 
+    @FXML
+    private TableColumn<Usuario, String> tblColPass;
+
+    @FXML
+    private TableColumn<Usuario, Boolean> tblColstatus;
+
+
     private final UsuarioService usuarioService = new UsuarioService();
     private final ObservableList<Usuario> usuarioList = FXCollections.observableArrayList();
 
@@ -71,7 +81,7 @@ public class HelloController {
             return;
         }
 
-        Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText());
+        Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText(), false,  txtPassword.getText());
 
         try {
             usuarioService.guardarUsuario(usuario);
@@ -91,7 +101,7 @@ public class HelloController {
         }
 
         Long id = Long.parseLong(txtId.getText());
-        Usuario usuarioActualizado = new Usuario(txtNombre.getText(), txtEmail.getText());
+        Usuario usuarioActualizado = new Usuario(txtNombre.getText(), txtEmail.getText(),false,  txtPassword.getText());
 
         try {
             usuarioService.actualizarUsuario(id, usuarioActualizado);
@@ -122,16 +132,40 @@ public class HelloController {
         }
     }
 
+    @FXML
+    public void restorePassword() {
+        if (txtEmail.getText().isEmpty()) {
+            mostrarAlerta("Error", "El campo de Email es obligatorio para cambiar la contraseña de un usuario");
+            return;
+        }
+
+        String Email = txtEmail.getText();
+
+        try {
+            usuarioService.enviarCorreoRecuperacion(Email);
+            limpiarCampos();
+            mostrarAlerta("Éxito", "Correo enviado correctamente");
+            cargarUsuariosEnTabla();
+        } catch (Exception e) {
+            mostrarAlerta("Error", "No se enviar el correo: " + e.getMessage());
+        }
+    }
+
+
     private void configurarColumnasTabla() {
         tblColumId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tblColumNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tblColEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tblColPass.setCellValueFactory(new PropertyValueFactory<>("password"));
+        tblColstatus.setCellValueFactory(new PropertyValueFactory<>("activo"));
     }
 
     private void configurarAnchoColumnas() {
         tblColumId.prefWidthProperty().bind(tblUsuarios.widthProperty().multiply(0.2)); // 20% para el ID
         tblColumNombre.prefWidthProperty().bind(tblUsuarios.widthProperty().multiply(0.4)); // 40% para el Nombre
         tblColEmail.prefWidthProperty().bind(tblUsuarios.widthProperty().multiply(0.4)); // 40% para el Email
+        tblColPass.prefWidthProperty().bind(tblUsuarios.widthProperty().multiply(0.4));
+        tblColstatus.prefWidthProperty().bind(tblUsuarios.widthProperty().multiply(0.4));
     }
 
     private void cargarUsuariosEnTabla() {

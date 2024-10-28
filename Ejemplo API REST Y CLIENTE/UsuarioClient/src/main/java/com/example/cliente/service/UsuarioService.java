@@ -21,7 +21,6 @@ public class UsuarioService {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; utf-8");
-        //connection.setRequestProperty("Authorization", "Bearer " + token);
         connection.setDoOutput(true);
 
         try (OutputStream os = connection.getOutputStream()) {
@@ -83,6 +82,19 @@ public class UsuarioService {
         int responseCode = connection.getResponseCode();
         if (responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_NO_CONTENT) {
             throw new Exception("Error al eliminar el usuario, código de respuesta: " + responseCode);
+        }
+    }
+
+    public void enviarCorreoRecuperacion(String email) throws Exception {
+        URL url = new URL(baseUrl + "usuarios/enviar-correo-restablecer?email=" + email);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode != HttpURLConnection.HTTP_OK) {
+            throw new Exception("Error al enviar el correo de recuperación, código de respuesta: " + responseCode);
+        } else {
+            System.out.println("Correo de recuperación enviado a " + email);
         }
     }
 }
